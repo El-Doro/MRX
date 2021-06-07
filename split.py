@@ -44,4 +44,3 @@ if __name__ == "__main__":
 
     split_audio_file(episode, duree_segment_ms, dossier_sons_bruts, dossier_sons_split)
 
-print("hello")

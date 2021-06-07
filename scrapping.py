@@ -14,10 +14,8 @@ from pathlib import Path
 
 
 Episode = namedtuple("Episode", ["url", "title"])
-
 BASEURL = "http://rendezvousavecmrx.free.fr"
-
-dossierSonsBruts = Path("./EpisodesBruts/")
+dossierSonsBruts = Path("./raw_data/EmissionsBrutes")
 
 
 """
@@ -36,8 +34,6 @@ def scrape_episodes():
 
 
 # Fonction download
-
-
 def download_episode(episode, destination_folder):
     file_stream = requests.get(episode.url, stream=True)
     with open(destination_folder / episode.title, "wb") as local_file:
@@ -49,18 +45,22 @@ def download_episode(episode, destination_folder):
 LE TRAITEMENT
 """
 # Initier le parsing de la page par BeautifulSoup
-
 link = urljoin(BASEURL, "page/liste.php")
 page = urllib.request.urlopen(link)
 soup = BeautifulSoup(page, "html.parser")
 
 # Récupérer les épisodes
-
 episodes = scrape_episodes()
 
 # Télécharger les épisodes
 for episode in episodes:
     download_episode(episode, dossierSonsBruts)
+
+
+if __name__ == "__main__":
+    episodes = scrape_episodes()
+    print(episodes[0])
+
 
 """
 
