@@ -36,3 +36,4 @@ six>=1.14
 #memoized-property
 termcolor
 jupyter
+matplotlib
